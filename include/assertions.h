@@ -18,9 +18,9 @@
 	#define debugAssert(expression) if (expression) {} else {printDebugAssertionFailure(__FILE__, __LINE__, __func__, #expression); handleFailedDebugAssertion();}
 #endif
 
-void printReleaseAssertionFailure(char *file, size_t lineNumber, const char *functionName, char *expression);
+void printReleaseAssertionFailure(char *file, int lineNumber, const char *functionName, char *expression);
 
-void printDebugAssertionFailure(char *file, size_t lineNumber, const char *functionName, char *expression);
+void printDebugAssertionFailure(char *file, int lineNumber, const char *functionName, char *expression);
 
 // These functions need to be defined by the user if used.
 void handleFailedReleaseAssertion(void);

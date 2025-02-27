@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"assertions.h": "c"
+		"assertions.h": "c",
+		"foo.h": "c"
 	}
 }
