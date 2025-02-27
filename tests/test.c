@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "assertions.h"
+#include "logging.h"
 #include "foo.h"
 
 void handleFailedReleaseAssertion(void) {
@@ -11,8 +12,7 @@ void handleFailedDebugAssertion(void) {
 }
 
 int main(void) {
-	releaseAssertionOutput = stderr;
-	debugAssertionOutput = stderr;
+	logErrorOutput = stderr;
 	releaseAssert(1 == 2);
 	foo();
 	return 0;
