@@ -7,6 +7,10 @@ void handleFailedAssertion(void) {
 	printf("my handler\n");
 }
 
+void handleFailedDebugAssertion(void) {
+	printf("my debug handler\n");
+}
+
 int main(void) {
 	assertionOutput = stderr;
 	debugAssertionOutput = stderr;

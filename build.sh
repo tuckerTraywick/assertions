@@ -1,11 +1,15 @@
 #!/bin/sh
 # Parse the flags.
 test=false
+valgrind=false
 configuration=""
 while getopts "tvb:" option; do
 	case $option in
 		t)
 			test=true
+			;;
+		v)
+			valgrind=true
 			;;
 		b)
 			configuration=$OPTARG
@@ -14,11 +18,11 @@ while getopts "tvb:" option; do
 done
 
 # Configure the build.
-if [ ! -f "configuration/$configuration.sh" -o ! $configuration ]; then
+if [ ! -f "configuration/$configuration.sh" -o ! "$configuration" ]; then
 	echo "Build must have configuration!"
 	exit 1
 fi
-source configuration/$configuration.sh
+source "configuration/$configuration.sh"
 
 # Generate the commands the script uses to compile and link the program and tests.
 sourceCommand="gcc $flags $defines $includes build/source.c -c -o build/source.o $libraries"
@@ -27,7 +31,7 @@ testCommand="gcc $flags $defines $includes build/source.o build/test.c -o binary
 
 # Echoes a single C file that includes every file in the first argument's directory except 'main.c'.
 createUnit() {
-	for file in $(find $1 -type f ! -name "main.c")
+	for file in $(find "$1" -type f ! -name "main.c")
 	do
 		echo "#include \"../$file\""
 	done
@@ -47,7 +51,7 @@ if [ -f source/main.c ]; then
 fi
 
 # Create the test compilation unit and executable.
-if $test; then
+if "$test"; then
 	createUnit tests > build/test.c
 	echo
 	echo $testCommand
