@@ -2,7 +2,7 @@
 #include "assertions.h"
 #include "foo.h"
 
-void handleFailedAssertion(void) {
+void handleFailedReleaseAssertion(void) {
 	printf("my handler\n");
 }
 
@@ -11,9 +11,9 @@ void handleFailedDebugAssertion(void) {
 }
 
 int main(void) {
-	assertionOutput = stderr;
+	releaseAssertionOutput = stderr;
 	debugAssertionOutput = stderr;
-	assert(1 == 2);
+	releaseAssert(1 == 2);
 	foo();
 	return 0;
 }

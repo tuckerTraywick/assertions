@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include "assertions.h"
 
-FILE *assertionOutput;
+FILE *releaseAssertionOutput;
 
 FILE *debugAssertionOutput;
 
-#ifndef DISABLE_ASSERTIONS
-	void printAssertionFailure(char *file, size_t lineNumber, char *expression) {
-		fprintf(assertionOutput, "[%s:%zu] Assertion failed: '%s'.\n", file, lineNumber, expression);
+#ifndef DISABLE_RELEASE_ASSERTIONS
+	void printReleaseAssertionFailure(char *file, size_t lineNumber, char *expression) {
+		fprintf(releaseAssertionOutput, "[%s:%zu] Release assertion failed: '%s'.\n", file, lineNumber, expression);
 	}
 #endif
 

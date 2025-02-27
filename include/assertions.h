@@ -5,10 +5,10 @@
 #include <stdio.h>
 
 // Define this flag by passing it to your compiler.
-#ifdef DISABLE_ASSERTIONS
-	#define assert(expression)
+#ifdef DISABLE_RELEASE_ASSERTIONS
+	#define releaseAssert(expression)
 #else
-	#define assert(expression) if (expression) {} else {printAssertionFailure(__FILE__, __LINE__, #expression); handleFailedAssertion();}
+	#define releaseAssert(expression) if (expression) {} else {printReleaseAssertionFailure(__FILE__, __LINE__, #expression); handleFailedReleaseAssertion();}
 #endif
 
 // Define this flag by passing it to your compiler.
@@ -18,16 +18,16 @@
 	#define debugAssert(expression) if (expression) {} else {printDebugAssertionFailure(__FILE__, __LINE__, #expression); handleFailedDebugAssertion();}
 #endif
 
-extern FILE *assertionOutput;
+extern FILE *releaseAssertionOutput;
 
 extern FILE *debugAssertionOutput;
 
-void printAssertionFailure(char *file, size_t lineNumber, char *expression);
+void printReleaseAssertionFailure(char *file, size_t lineNumber, char *expression);
 
 void printDebugAssertionFailure(char *file, size_t lineNumber, char *expression);
 
 // These functions need to be defined by the user if used.
-void handleFailedAssertion(void);
+void handleFailedReleaseAssertion(void);
 
 void handleFailedDebugAssertion(void);
 
