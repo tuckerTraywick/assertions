@@ -1,21 +1,33 @@
-#/bin/sh
-$valgrindFlags="--leak-check=full --show-leak-kinds=all --track-origins=yes"
-
-./build.sh $@
-
+#!/bin/sh
+# Parse the flags.
 test=false
 valgrind=false
-while getopts "tv" option; do
+configuration=""
+while getopts "tvb:" option; do
 	case $option in
 		t)
-		test=true
-		;;
+			test=true
+			;;
 		v)
-		valgrind=true
-		;;
+			valgrind=true
+			;;
+		b)
+			configuration=$OPTARG
+			;;
 	esac
 done
 
+# Configure valgrind.
+if [ ! -f "configuration/$configuration.sh" -o ! "$configuration" ]; then
+	echo "Build must have configuration!"
+	exit 1
+fi
+source configuration/$configuration.sh
+
+# Build the code.
+./build.sh $@
+
+# Run the tests.
 if $test; then
 	echo
 	echo "---- TESTING ----"
@@ -26,6 +38,7 @@ if $test; then
 	fi
 fi
 
+# Run the build.
 if [ -f binary/run ]; then
 	echo
 	echo "---- RUNNING ----"

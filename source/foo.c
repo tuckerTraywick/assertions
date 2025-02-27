@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include "foo.h"
 #include "assertions.h"
 
-void callHandler(void) {
-	printf("calling the handler\n");
-	handleFailedAssertion();
+void foo(void) {
+	assert(1 == 2);
 }

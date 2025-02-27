@@ -1,1 +1,1 @@
-void callHandler(void);
+void foo(void);

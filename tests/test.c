@@ -4,10 +4,13 @@
 #include "foo.h"
 
 void handleFailedAssertion(void) {
-	printf("my hanlder\n");
+	printf("my handler\n");
 }
 
 int main(void) {
-	callHandler();
+	assertionOutput = stderr;
+	debugAssertionOutput = stderr;
+	assert(1 == 2);
+	foo();
 	return 0;
 }

@@ -1,0 +1,2 @@
+- Upstream run.sh and build.sh: added defines, mistyped shebang.
+- Upstream configuration: added build config support.
