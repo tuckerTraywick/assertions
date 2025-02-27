@@ -6,16 +6,16 @@
 
 // Define this flag by passing it to your compiler.
 #ifdef DISABLE_ASSERTIONS
-	#define assert(expression, ...)
+	#define assert(expression)
 #else
-	#define assert(expression, ...) if (expression) {} else {printAssertionFailure(__FILE__, __LINE__, #expression); handleFailedAssertion();}
+	#define assert(expression) if (expression) {} else {printAssertionFailure(__FILE__, __LINE__, #expression); handleFailedAssertion();}
 #endif
 
 // Define this flag by passing it to your compiler.
 #ifdef DISABLE_DEBUG_ASSERTIONS
-	#define debugAssert(expression, ...)
+	#define debugAssert(expression)
 #else
-	#define debugAssert(expression, ...) if (expression) {} else {printDebugAssertionFailure(__FILE__, __LINE__, #expression); handleFailedDebugAssertion();}
+	#define debugAssert(expression) if (expression) {} else {printDebugAssertionFailure(__FILE__, __LINE__, #expression); handleFailedDebugAssertion();}
 #endif
 
 extern FILE *assertionOutput;
